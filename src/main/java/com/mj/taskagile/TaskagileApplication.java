@@ -9,5 +9,4 @@ public class TaskagileApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TaskagileApplication.class, args);
 	}
-
 }
