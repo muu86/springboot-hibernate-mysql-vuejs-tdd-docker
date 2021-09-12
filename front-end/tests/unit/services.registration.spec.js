@@ -36,7 +36,7 @@ describe('services/registration', () => {
       expect(request).toBeTruthy()
       request.reject({
         status: 400,
-        response: {message: '                                         Bad request'}
+        response: {message: 'Bad request'}
       })
     })
 

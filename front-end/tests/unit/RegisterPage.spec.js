@@ -1,6 +1,7 @@
-import RegisterPage from '@/views/RegisterPage'
 import { mount, createLocalVue } from '@vue/test-utils'
 import VueRouter from 'vue-router'
+
+import RegisterPage from '@/views/RegisterPage'
 import registrationService from '@/services/registration'
 
 const localVue = createLocalVue()
@@ -116,4 +117,19 @@ describe('RegisterPage.vue', () => {
     await wrapper.vm.$nextTick()
     expect(wrapper.find('.failed').isVisible()).toBe(true)
   })
+
+  it('should fail when the email address is invalid', async () => {
+    await wrapper.setData({
+      form: {
+        username: 'test',
+        emailAddress: 'bad-email-address',
+        password: 'sunny!!'
+      }
+    })
+
+    wrapper.vm.submitForm()
+
+    expect(registerSpy).not.toHaveBeenCalled()
+  })
+
 })

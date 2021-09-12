@@ -4,6 +4,8 @@ Vue.js 로 프론트 개발
 
 * 단위테스트 - Jest
 * 통합테스트 - NightWatch
+* vue-test-utils - Vue.js 단위 테스트 라이브러리
+* Vuelidate - Vue.js 검증 라이브러리
 
 #### vue-test-utils 사용 시 책과 버전이 맞지 않아 문제  
 <https://stackoverflow.com/questions/63931735/vue-v-model-bind-is-not-working-in-unit-test>  
@@ -39,3 +41,7 @@ Vue.js 로 프론트 개발
 #### 프로미스 기반 메소드 테스트 시  
 * wrapper.vm.$nextTick()  
 * expect.assertions() -- assertion 호출 횟 수 검증
+  
+#### vuelidate 적용 시 error 해결 못 했음  
+import { ... } from 'vuelidate/lib/validator'  
+Could not find a declaration file for module 'vuelidate/lib/validators'.  
