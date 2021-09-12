@@ -1,34 +1,6 @@
-# front-end
+### front-end  
 
-## Project setup
-```
-npm install
-```
+Vue.js 로 프론트 개발  
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your unit tests
-```
-npm run test:unit
-```
-
-### Run your end-to-end tests
-```
-npm run test:e2e
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+* 단위테스트 - Jest
+* 통합테스트 - NightWatch
