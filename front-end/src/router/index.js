@@ -2,11 +2,13 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import LoginRouter from './LoginRouter'
+import RegisterRouter from './RegisterRouter'
 
 Vue.use(VueRouter)
 
 const routes = [
-  LoginRouter
+  LoginRouter,
+  RegisterRouter
 ]
 
 const router = new VueRouter({
