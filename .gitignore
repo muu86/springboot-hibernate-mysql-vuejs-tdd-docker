@@ -6,6 +6,7 @@ target/
 
 ### MJ ###
 application-dev.properties
+mvn-output.log
 
 ### STS ###
 .apt_generated
