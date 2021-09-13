@@ -9,7 +9,7 @@
 
 책에서 다루는 TDD 학습  
 
-front-end : [front-end](front-end)
+[front-end](front-end)
 
 #### mysql docker container
 * docker 로 mysql 설치
