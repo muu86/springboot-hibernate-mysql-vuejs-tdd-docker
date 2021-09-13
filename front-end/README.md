@@ -45,3 +45,12 @@ Vue.js 로 프론트 개발
 #### vuelidate 적용 시 error 해결 못 했음  
 import { ... } from 'vuelidate/lib/validator'  
 Could not find a declaration file for module 'vuelidate/lib/validators'.  
+
+=> 집에서 git clone 후 npm install  
+package-lock.json 에  
+* chalk
+* has-flag
+* loader-utils
+* supports-color
+* vue-loader-v16  
+이 새로 설치되었고 vuelidate 로드 문제 해결됨 아직 원인은 모르겠음

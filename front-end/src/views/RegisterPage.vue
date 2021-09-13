@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import { required } from 'vuelidate/lib/validators'
 import registrationService from '@/services/registration'
 
 export default {
@@ -53,8 +54,24 @@ export default {
       errorMessage: ''
     }
   },
+  validations: {
+    form: {
+      username: {
+        required
+      },
+      emailAddress: {
+
+      },
+      password: {
+
+      }
+    }
+  },
   methods: {
     submitForm () {
+      this.$v.$touch()
+      if (this.$v.$invalid) return
+      
       registrationService.register(this.form).then(() => {
         this.$router.push({ name: 'LoginPage' })
       }).catch(error => {

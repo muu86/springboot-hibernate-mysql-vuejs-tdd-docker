@@ -1,11 +1,13 @@
 import { mount, createLocalVue } from '@vue/test-utils'
 import VueRouter from 'vue-router'
+import Vuelidate from 'vuelidate'
 
 import RegisterPage from '@/views/RegisterPage'
 import registrationService from '@/services/registration'
 
 const localVue = createLocalVue()
 localVue.use(VueRouter)
+localVue.use(Vuelidate)
 const router = new VueRouter()
 
 jest.mock('@/services/registration')
@@ -105,6 +107,7 @@ describe('RegisterPage.vue', () => {
   it('should fail it is a existing user', async () => {
     await wrapper.setData({
       form: {
+        username: '이게 없으면 validate 통과 못함',
         emailAddress: 'notSunny@gmail.com'
       }
     })
@@ -119,18 +122,18 @@ describe('RegisterPage.vue', () => {
   })
 
   // vuelidate 적용 실패
-  // it('should fail when the email address is invalid', async () => {
-  //   await wrapper.setData({
-  //     form: {
-  //       username: 'test',
-  //       emailAddress: 'bad-email-address',
-  //       password: 'sunny!!'
-  //     }
-  //   })
+  it('should fail when the email address is invalid', async () => {
+    await wrapper.setData({
+      form: {
+        username: '',
+        emailAddress: 'bad-email-address',
+        password: 'sunny!!'
+      }
+    })
 
-  //   wrapper.vm.submitForm()
+    wrapper.vm.submitForm()
 
-  //   expect(registerSpy).not.toHaveBeenCalled()
-  // })
+    expect(registerSpy).not.toHaveBeenCalled()
+  })
 
 })
