@@ -9,5 +9,4 @@ class TaskagileApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }
