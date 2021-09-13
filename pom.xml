@@ -29,6 +29,12 @@
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -64,6 +70,13 @@
 			</activation>
 			<properties>
 				<activeProfile>dev</activeProfile>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>home</id>
+			<properties>
+				<activeProfile>home</activeProfile>
 			</properties>
 		</profile>
 	</profiles>
