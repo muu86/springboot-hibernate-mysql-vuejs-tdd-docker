@@ -17,4 +17,4 @@
 <https://stackoverflow.com/questions/6865538/solving-a-communications-link-failure-with-jdbc-and-mysql>  
 윈도우 cmd 창에서 docker run 시 작동함  
 * maven profile 설정으로 spring.profiles.active 관리  
-
+* 노트북에선 docker 돌리기 버거워 h2 사용
