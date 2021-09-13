@@ -107,8 +107,9 @@ describe('RegisterPage.vue', () => {
   it('should fail it is a existing user', async () => {
     await wrapper.setData({
       form: {
-        username: '이게 없으면 validate 통과 못함',
-        emailAddress: 'notSunny@gmail.com'
+        username: 'topassvalidate',
+        emailAddress: 'notsunny@gmail.com',
+        password: '000000'
       }
     })
 
@@ -121,11 +122,10 @@ describe('RegisterPage.vue', () => {
     expect(wrapper.find('.failed').isVisible()).toBe(true)
   })
 
-  // vuelidate 적용 실패
   it('should fail when the email address is invalid', async () => {
     await wrapper.setData({
       form: {
-        username: '',
+        username: 'test',
         emailAddress: 'bad-email-address',
         password: 'sunny!!'
       }
@@ -136,4 +136,31 @@ describe('RegisterPage.vue', () => {
     expect(registerSpy).not.toHaveBeenCalled()
   })
 
+  it('should fail when the username is invalid', async () => {
+    await wrapper.setData({
+      form: {
+        username: 'a',
+        emailAdderss: 'test@gmail.com',
+        password: '1111'
+      }
+    })
+
+    wrapper.vm.submitForm()
+
+    expect(registerSpy).not.toHaveBeenCalled()
+  })
+
+  it('should fail when the password is invalid', async () => {
+    await wrapper.setData({
+      form: {
+        username: 'test',
+        emailAdderss: 'test@gmail.com',
+        password: '12345' // 6글자 이상
+      }
+    })
+
+    wrapper.vm.submitForm()
+
+    expect(registerSpy).not.toHaveBeenCalled()
+  })
 })
