@@ -60,6 +60,9 @@
     * application context 로드
     * db 설정도 불러오는데 profile을 설정하지 않아 에러가 발생하여 애 먹음.. @ActiveProfiles 테스트 클래스에
     * MockMvc 사용하려면 @AutoConfigureMockMvc 추가
+* 예외 예상 코드
+    * junit4 - @Test(expected =".class")
+    * jupiter - assertThrows (.class, () -> {})
 
 #### mysql docker container
 * docker 로 mysql 설치
@@ -67,4 +70,4 @@
 <https://stackoverflow.com/questions/6865538/solving-a-communications-link-failure-with-jdbc-and-mysql>  
 윈도우 cmd 창에서 docker run 시 작동함  
 * maven profile 설정으로 spring.profiles.active 관리  
-* 노트북에선 docker 돌리기 버거워 h2 사용
+* 노트북에선 docker 돌리기 버거워 h2 사용 --maven profile(home)
