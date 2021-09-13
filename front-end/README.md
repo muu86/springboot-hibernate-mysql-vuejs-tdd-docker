@@ -9,7 +9,7 @@ Vue.js 로 프론트 개발
 
 #### vue-test-utils 사용 시 책과 버전이 맞지 않아 문제  
 <https://stackoverflow.com/questions/63931735/vue-v-model-bind-is-not-working-in-unit-test>  
-```
+```javascript
   it('should have form inputs bound with data model', async () => {
     const username = 'sunny'
     const emailAddress = 'sunny@taskagile.com'
