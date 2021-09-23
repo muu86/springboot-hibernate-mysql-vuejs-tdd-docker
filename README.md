@@ -63,6 +63,8 @@
 * 예외 예상 코드
     * junit4 - @Test(expected =".class")
     * jupiter - assertThrows (.class, () -> {})
+* Mockito.mock() vs @Mock vs @MockBean
+    * @Mock 은 테스트 클래스에 적용가능 -- @ExtendWith(MockitoExtension.class)
 
 #### mysql docker container
 * docker 로 mysql 설치
