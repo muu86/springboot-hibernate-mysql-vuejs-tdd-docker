@@ -3,9 +3,9 @@ package com.mj.taskagile.web.apis;
 import javax.validation.Valid;
 
 import com.mj.taskagile.domain.application.UserService;
-import com.mj.taskagile.domain.model.EmailAddressExistsException;
-import com.mj.taskagile.domain.model.RegistrationException;
-import com.mj.taskagile.domain.model.UsernameExistsException;
+import com.mj.taskagile.domain.model.user.EmailAddressExistsException;
+import com.mj.taskagile.domain.model.user.RegistrationException;
+import com.mj.taskagile.domain.model.user.UsernameExistsException;
 import com.mj.taskagile.web.payload.RegistrationPayload;
 import com.mj.taskagile.web.results.ApiResult;
 import com.mj.taskagile.web.results.Result;

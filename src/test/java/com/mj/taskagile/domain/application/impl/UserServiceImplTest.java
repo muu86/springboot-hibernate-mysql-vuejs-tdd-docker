@@ -1,28 +1,41 @@
 package com.mj.taskagile.domain.application.impl;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import com.mj.taskagile.domain.application.commands.RegistrationCommand;
-import com.mj.taskagile.domain.model.EmailAddressExistsException;
-import com.mj.taskagile.domain.model.RegistrationException;
-import com.mj.taskagile.domain.model.UsernameExistsException;
+import com.mj.taskagile.domain.common.event.DomainEventPublisher;
+import com.mj.taskagile.domain.common.mail.MailManager;
+import com.mj.taskagile.domain.common.mail.MessageVariable;
+import com.mj.taskagile.domain.model.user.EmailAddressExistsException;
+import com.mj.taskagile.domain.model.user.RegistrationException;
+import com.mj.taskagile.domain.model.user.User;
+import com.mj.taskagile.domain.model.user.UsernameExistsException;
+import com.mj.taskagile.domain.model.user.events.UserRegisteredEvent;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+@ExtendWith(MockitoExtension.class)
 public class UserServiceImplTest {
 
+    @Mock
     private RegistrationManagement registrationManagementMock;
-    // private DomainEventPublisher domainEventPublisherMock;
-    // private MailManager mailManagerMock;
+    private DomainEventPublisher domainEventPublisherMock;
+    private MailManager mailManagerMock;
     private UserServiceImpl instance;
 
     @BeforeEach
     public void setup() {
         registrationManagementMock = mock(RegistrationManagement.class);
-        // eventPublisherMock = mock(DomainEventPublisher.class);
-        // mailManagerMock = mock(MailManager.class);
+        domainEventPublisherMock = mock(DomainEventPublisher.class);
+        mailManagerMock = mock(MailManager.class);
         instance = new UserServiceImpl(
             registrationManagementMock
             // eventPublisherMock,

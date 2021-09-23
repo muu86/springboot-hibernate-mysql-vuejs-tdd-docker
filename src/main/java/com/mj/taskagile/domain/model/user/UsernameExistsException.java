@@ -1,4 +1,4 @@
-package com.mj.taskagile.domain.model;
+package com.mj.taskagile.domain.model.user;
 
 public class UsernameExistsException extends RegistrationException {
     

@@ -7,8 +7,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.mj.taskagile.domain.application.UserService;
-import com.mj.taskagile.domain.model.EmailAddressExistsException;
-import com.mj.taskagile.domain.model.UsernameExistsException;
+import com.mj.taskagile.domain.model.user.EmailAddressExistsException;
+import com.mj.taskagile.domain.model.user.UsernameExistsException;
 import com.mj.taskagile.utils.JsonUtils;
 import com.mj.taskagile.web.payload.RegistrationPayload;
 
