@@ -12,20 +12,16 @@ import com.mj.taskagile.domain.common.mail.MailManager;
 import com.mj.taskagile.domain.common.mail.MessageVariable;
 import com.mj.taskagile.domain.model.user.EmailAddressExistsException;
 import com.mj.taskagile.domain.model.user.RegistrationException;
+import com.mj.taskagile.domain.model.user.RegistrationManagement;
 import com.mj.taskagile.domain.model.user.User;
 import com.mj.taskagile.domain.model.user.UsernameExistsException;
 import com.mj.taskagile.domain.model.user.events.UserRegisteredEvent;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
-@ExtendWith(MockitoExtension.class)
 public class UserServiceImplTest {
 
-    @Mock
     private RegistrationManagement registrationManagementMock;
     private DomainEventPublisher domainEventPublisherMock;
     private MailManager mailManagerMock;
@@ -37,9 +33,9 @@ public class UserServiceImplTest {
         domainEventPublisherMock = mock(DomainEventPublisher.class);
         mailManagerMock = mock(MailManager.class);
         instance = new UserServiceImpl(
-            registrationManagementMock
-            // eventPublisherMock,
-            // mailManagerMock
+            registrationManagementMock,
+            domainEventPublisherMock,
+            mailManagerMock
         );
     }
 
@@ -51,7 +47,7 @@ public class UserServiceImplTest {
     }
 
     @Test
-    public void register_existingUsername_shouldFail() {
+    public void register_existingUsername_shouldFail() throws RegistrationException {
         String username = "existing";
         String emailAddress = "sunny@taskagile.com";
         String password = "password";
@@ -67,7 +63,7 @@ public class UserServiceImplTest {
     }
 
     @Test
-    public void register_existingEmailAddress_shouldFail() {
+    public void register_existingEmailAddress_shouldFail() throws RegistrationException {
         String username = "mjkkimg";
         String emailAddress = "exist@taskagile.com";
         String password = "password";
@@ -88,20 +84,18 @@ public class UserServiceImplTest {
         String emailAddress = "mjking@taskagile.com";
         String password = "password";
         User newUser = User.create(username, emailAddress, password);
+        
         when(registrationManagementMock.register(username, emailAddress, password))
             .thenReturn(newUser);
-        
         RegistrationCommand command = new RegistrationCommand(username, emailAddress, password);
         instance.register(command);
 
         verify(mailManagerMock).send(
             emailAddress,
             "Welcome to TaskAgile",
-            "welcom.ftl",
+            "welcome.ftl",
             MessageVariable.from("user", newUser)
         );
         verify(domainEventPublisherMock).publish(new UserRegisteredEvent(newUser));
-    } 
-
-    
+    }
 }

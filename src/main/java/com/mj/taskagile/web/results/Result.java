@@ -1,6 +1,5 @@
 package com.mj.taskagile.web.results;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;

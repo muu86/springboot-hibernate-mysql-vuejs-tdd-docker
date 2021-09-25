@@ -8,25 +8,23 @@ import com.mj.taskagile.domain.common.event.DomainEventPublisher;
 import com.mj.taskagile.domain.common.mail.MailManager;
 import com.mj.taskagile.domain.common.mail.MessageVariable;
 import com.mj.taskagile.domain.model.user.RegistrationException;
+import com.mj.taskagile.domain.model.user.RegistrationManagement;
 import com.mj.taskagile.domain.model.user.User;
+import com.mj.taskagile.domain.model.user.events.UserRegisteredEvent;
 
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
 
-    private RegistrationManagement registrationManagement;
-    private DomainEventPublisher domainEventPublisher;
-    private MailManager mailManager;
-
-    public UserServiceImpl(RegistrationManagement registrationManagement, DomainEventPublisher domainEventPublisher,
-            MailManager mailManager) {
-        this.registrationManagement = registrationManagement;
-        this.domainEventPublisher = domainEventPublisher;
-        this.mailManager = mailManager;
-    }
+    private final RegistrationManagement registrationManagement;
+    private final DomainEventPublisher domainEventPublisher;
+    private final MailManager mailManager;
 
     @Override
     public void register(RegistrationCommand command) throws RegistrationException {
@@ -38,6 +36,7 @@ public class UserServiceImpl implements UserService {
         );
         
         sendWelcomMessage(newUser);
+        domainEventPublisher.publish(new UserRegisteredEvent(newUser));
     }
     
     private void sendWelcomMessage(User user) {
