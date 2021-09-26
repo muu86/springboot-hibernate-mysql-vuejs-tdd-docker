@@ -52,7 +52,7 @@
 * Jupiter -> @ExtendWith(~Extension.class), @SpringBootTest 가 포함하고 있음
 * @WebMvcTest + @MockBean
     * @Controller 관련 Bean 만 스캔
-    * not @Component, @Service or @Repository beans
+    * @Component, @Service, @Repository 스캔 X
     * @MockBean 과 함께 사용 -- 스캔하지 않는 Bean 로드
     * @SpringBootTest 어노테이션보다 가볍게
     * @ExtendWith(SpringExtension.class) 어노테이션 포함하므로 @SpringBootTest와 함께 사용 X
@@ -65,6 +65,9 @@
     * jupiter - assertThrows (.class, () -> {})
 * Mockito.mock() vs @Mock vs @MockBean
     * @Mock 은 테스트 클래스에 적용가능 -- @ExtendWith(MockitoExtension.class)
+* @ContextConfiguration
+    * 통합 테스트 시 빈 설정 클래스 불러오기 위해 사용
+    * @Configuration, @Component, @Service, @Repository 어노테이션 달린 클래스
 
 #### mysql docker container
 * docker 로 mysql 설치

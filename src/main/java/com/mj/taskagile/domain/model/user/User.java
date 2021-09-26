@@ -12,6 +12,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.mj.taskagile.domain.common.model.AbstractBaseEntity;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -21,7 +23,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Entity
 @Table(name = "user")
-public class User {
+public class User extends AbstractBaseEntity{
     
     private static final long serialVersionUID = -538781580460070724L;
 
