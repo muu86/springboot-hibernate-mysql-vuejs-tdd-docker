@@ -69,7 +69,10 @@
     * 통합 테스트 시 빈 설정 클래스 불러오기 위해 사용
     * @Configuration, @Component, @Service, @Repository 어노테이션 달린 클래스
 
-#### mysql docker container
+#### 스프링 시큐리티
+![UsernamePasswordAuthenticationFilter](https://user-images.githubusercontent.com/71859468/137324764-df37e2c6-5e68-4061-a47c-920955519bbe.png)
+
+#### Mysql Docker Container
 * docker 로 mysql 설치
 * wsl2 ubuntu terminal 에서 mysql 컨테이너를 만들 때 권한 문제 발생  
 <https://stackoverflow.com/questions/6865538/solving-a-communications-link-failure-with-jdbc-and-mysql>  

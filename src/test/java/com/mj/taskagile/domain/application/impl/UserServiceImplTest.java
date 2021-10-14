@@ -14,6 +14,7 @@ import com.mj.taskagile.domain.model.user.EmailAddressExistsException;
 import com.mj.taskagile.domain.model.user.RegistrationException;
 import com.mj.taskagile.domain.model.user.RegistrationManagement;
 import com.mj.taskagile.domain.model.user.User;
+import com.mj.taskagile.domain.model.user.UserRepository;
 import com.mj.taskagile.domain.model.user.UsernameExistsException;
 import com.mj.taskagile.domain.model.user.events.UserRegisteredEvent;
 
@@ -25,6 +26,7 @@ public class UserServiceImplTest {
     private RegistrationManagement registrationManagementMock;
     private DomainEventPublisher domainEventPublisherMock;
     private MailManager mailManagerMock;
+    private UserRepository userRepository;
     private UserServiceImpl instance;
 
     @BeforeEach
@@ -32,10 +34,13 @@ public class UserServiceImplTest {
         registrationManagementMock = mock(RegistrationManagement.class);
         domainEventPublisherMock = mock(DomainEventPublisher.class);
         mailManagerMock = mock(MailManager.class);
+        userRepository = mock(UserRepository.class);
+        
         instance = new UserServiceImpl(
             registrationManagementMock,
             domainEventPublisherMock,
-            mailManagerMock
+            mailManagerMock,
+            userRepository
         );
     }
 
