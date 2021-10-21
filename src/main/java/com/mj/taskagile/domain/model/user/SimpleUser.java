@@ -1,6 +1,5 @@
 package com.mj.taskagile.domain.model.user;
 
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
 

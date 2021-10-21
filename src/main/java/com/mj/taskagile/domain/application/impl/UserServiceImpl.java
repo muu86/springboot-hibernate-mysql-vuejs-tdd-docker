@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        if (StringUtils.isEmpty(username)) {
+        if (!StringUtils.hasText(username)) {
             throw new UsernameNotFoundException("No user found");
         }
         
