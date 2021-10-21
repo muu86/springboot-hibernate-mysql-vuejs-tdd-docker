@@ -64,6 +64,11 @@ public class User extends AbstractBaseEntity{
         return user;
     }
 
+    public void updateName(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

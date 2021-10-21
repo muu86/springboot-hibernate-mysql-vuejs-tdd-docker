@@ -1,10 +1,18 @@
 package com.mj.taskagile.domain.application.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import java.io.IOException;
+import java.nio.file.attribute.UserDefinedFileAttributeView;
 
 import com.mj.taskagile.domain.application.commands.RegistrationCommand;
 import com.mj.taskagile.domain.common.event.DomainEventPublisher;
@@ -13,13 +21,17 @@ import com.mj.taskagile.domain.common.mail.MessageVariable;
 import com.mj.taskagile.domain.model.user.EmailAddressExistsException;
 import com.mj.taskagile.domain.model.user.RegistrationException;
 import com.mj.taskagile.domain.model.user.RegistrationManagement;
+import com.mj.taskagile.domain.model.user.SimpleUser;
 import com.mj.taskagile.domain.model.user.User;
 import com.mj.taskagile.domain.model.user.UserRepository;
 import com.mj.taskagile.domain.model.user.UsernameExistsException;
 import com.mj.taskagile.domain.model.user.events.UserRegisteredEvent;
 
+import org.apache.commons.lang3.reflect.FieldUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 public class UserServiceImplTest {
 
@@ -42,6 +54,65 @@ public class UserServiceImplTest {
             mailManagerMock,
             userRepository
         );
+    }
+
+    @Test
+    public void loadUserByUsername_emptyUsername_shouldFail() {
+        // assertThrows(UsernameNotFoundException.class, () -> {
+        //     instance.loadUserByUsername("");
+        // });
+
+        Exception exception = null;
+        try {
+          instance.loadUserByUsername("");
+        } catch (Exception e) {
+          exception = e;
+        }
+        assertNotNull(exception);
+        assertTrue(exception instanceof UsernameNotFoundException);
+        verify(userRepository, never()).findByUsername("");
+        verify(userRepository, never()).findByEmailAddress("");
+    }
+
+    @Test
+    public void loadUserByUsername_notExistUsername_shoudFail() {
+        String notExistUsername = "NotExistUsername";
+        when(userRepository.findByUsername(notExistUsername)).thenReturn(null);
+
+        assertThrows(UsernameNotFoundException.class, () -> {
+            instance.loadUserByUsername(notExistUsername);
+        });
+        verify(userRepository).findByUsername(notExistUsername);
+        verify(userRepository, never()).findByEmailAddress(notExistUsername);
+    }
+
+    @Test
+    public void loadUserByUsername_existUsername_shouldSucceed() throws IllegalAccessException {
+        String existUsername = "ExistUsername";
+        // User foundUser = User.create(existUsername, "user@taskagile.com", "EncryptedPassword!");
+        // foundUser.updateName("Test", "User");
+
+        User mockUser = mock(User.class);
+        when(mockUser.getUsername()).thenReturn(existUsername);
+        when(mockUser.getPassword()).thenReturn("EncryptedPassword!");
+        when(mockUser.getId()).thenReturn(1L);
+
+        // FieldUtils.writeField(mockUser, "id", 1L, true);
+        when(userRepository.findByUsername(existUsername)).thenReturn(mockUser);
+
+        Exception exception = null;
+        UserDetails userDetails = null;
+        try {
+            userDetails = instance.loadUserByUsername(existUsername);
+        } catch (Exception e) {
+            exception = e;
+        }
+        assertNull(exception);
+        verify(userRepository).findByUsername(existUsername);
+        verify(userRepository, never()).findByEmailAddress(existUsername);
+        assertNotNull(userDetails);
+        assertEquals(existUsername, userDetails.getUsername());
+        assertTrue(userDetails instanceof SimpleUser);
     }
 
     @Test
