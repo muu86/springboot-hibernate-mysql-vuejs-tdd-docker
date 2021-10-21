@@ -11,9 +11,6 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.io.IOException;
-import java.nio.file.attribute.UserDefinedFileAttributeView;
-
 import com.mj.taskagile.domain.application.commands.RegistrationCommand;
 import com.mj.taskagile.domain.common.event.DomainEventPublisher;
 import com.mj.taskagile.domain.common.mail.MailManager;
@@ -27,7 +24,6 @@ import com.mj.taskagile.domain.model.user.UserRepository;
 import com.mj.taskagile.domain.model.user.UsernameExistsException;
 import com.mj.taskagile.domain.model.user.events.UserRegisteredEvent;
 
-import org.apache.commons.lang3.reflect.FieldUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.core.userdetails.UserDetails;

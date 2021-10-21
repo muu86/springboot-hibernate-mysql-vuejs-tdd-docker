@@ -72,6 +72,11 @@
 #### 스프링 시큐리티
 ![UsernamePasswordAuthenticationFilter](https://user-images.githubusercontent.com/71859468/137324764-df37e2c6-5e68-4061-a47c-920955519bbe.png)
 
+### JavaMail
+* Simple Mail Transfer Protocol(SMTP)
+* 개발 환경에서 실제 이메일을 받을 필요는 없다. 애플리케이션이 올바른 메시지를 전송했는지 검증할 수 있으면 됨
+* 파이썬 smtpd 설치
+
 #### Mysql Docker Container
 * docker 로 mysql 설치
 * wsl2 ubuntu terminal 에서 mysql 컨테이너를 만들 때 권한 문제 발생  
