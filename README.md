@@ -84,3 +84,6 @@
 윈도우 cmd 창에서 docker run 시 작동함  
 * maven profile 설정으로 spring.profiles.active 관리  
 * 노트북에선 docker 돌리기 버거워 h2 사용 --maven profile(home)
+
+#### 기타
+* 깃허브 커밋 표시 안 됌
